@@ -12,7 +12,12 @@ const SAVE_FILE = './last.json';
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
 
-  await page.goto('https://yoyaku03.city.sumida.lg.jp/user/Home');
+await page.goto("https://yoyaku03.city.sumida.lg.jp/user/Home", {
+  waitUntil: "domcontentloaded",
+  timeout: 60000
+});
+
+await page.waitForTimeout(3000);
 
   // --- 操作 ---
   await page.getByRole('button', { name: '屋外スポーツ施設' }).click();
